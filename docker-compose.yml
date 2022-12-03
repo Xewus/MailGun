@@ -15,8 +15,7 @@ services:
     volumes:
       - .:/mailgun
     restart: always
-    #command: python2 flask_run.py & celery worker -A src.celery_tasks.tasks -B -l info
-    ports:
+     ports:
       - "8080:8080"
     depends_on:
       - redis
