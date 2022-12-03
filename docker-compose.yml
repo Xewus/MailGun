@@ -11,7 +11,7 @@ services:
       - "6379:6379"
   
   web:
-    build: .
+    image: "xewus/mailgun:test"
     volumes:
       - .:/mailgun
     restart: always

@@ -4,7 +4,7 @@ RUN mkdir /mailgun
 COPY ./requirements.txt /mailgun/
 RUN pip2 install -r /mailgun/requirements.txt --no-cache-dir
 COPY src /mailgun/src/
-COPY flask_run.py start_in_docker.py /mailgun/
+COPY flask_run.py /mailgun/
 WORKDIR /mailgun/
 RUN chmod +x flask_run.py
 ENV SECRET_KEY=Your2secret1key
