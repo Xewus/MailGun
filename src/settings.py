@@ -3,17 +3,18 @@ import sys
 from dotenv import load_dotenv
 
 root_dir = os.path.abspath(os.path.dirname(__file__))
-load_dotenv(os.path.join(root_dir, '.env'))
+
+load_dotenv()
 
 sys.path.append(root_dir)
 
 SQLITE_DB = os.path.join(root_dir, '../db.sqlite')
 
 FlaskConfig = {
-    'ENV': os.environ.get('ENV', 'production'),
     'DEBUG': os.environ.get('DEBUG', False),
     'SECRET_KEY': os.environ.get('SECRET_KEY', 'you-will-never-guess'),
     'MAX_CONTENT_LENGTH': 1024 * 1024,  # 1 MB
+    'TEMPLATES_AUTO_RELOAD': True,
     'DATABASE': {
         'name': SQLITE_DB,
         'engine': 'peewee.SqliteDatabase',
@@ -24,6 +25,10 @@ PAGE_TEMPLATES_DIR = os.path.join(root_dir, 'web/templates')
 EMAIL_TEMPLATES_DIR = os.path.join(root_dir, 'email_templates')
 
 UPLOAD_DIR = os.path.join(root_dir, '../upload')
+print UPLOAD_DIR
+if not os.path.exists(UPLOAD_DIR):
+    os.makedirs(UPLOAD_DIR)
+
 ALLOWED_EXTENSIONS = ('csv',)
 
 GOOGLE_CODE_CONNECTED = [220]

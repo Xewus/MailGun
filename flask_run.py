@@ -1,9 +1,7 @@
 #!venv/bin/python
 
 if __name__ == '__main__':
-    from waitress import serve
-    from src.web.server import create_tables, flask_app
+    from src.web.server import flask_app
 
-    create_tables()
-    serve(flask_app)
-    # flask_app.run()
+    from waitress import serve
+    serve(flask_app, host="0.0.0.0", port=8080)

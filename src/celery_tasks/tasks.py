@@ -5,8 +5,10 @@ from src.settings import CELERY_BROKER_URL
 
 celery_app = Celery(
     __name__,
-    broker=CELERY_BROKER_URL
+    broker=CELERY_BROKER_URL,
+    C_FORCE_ROOT=1
 )
+
 celery_app.config_from_object(__name__)
 
 

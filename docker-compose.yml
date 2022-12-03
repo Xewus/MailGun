@@ -1,0 +1,30 @@
+---
+version: '3.8'
+
+services:
+  redis:
+    image: "redis:alpine"
+    restart: always
+    expose:
+      - '6379'
+    ports:
+      - "6379:6379"
+  
+  web:
+    build: .
+    volumes:
+      - .:/mailgun
+    restart: always
+    #command: python2 flask_run.py & celery worker -A src.celery_tasks.tasks -B -l info
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    links:
+      - redis:redis
+    env_file:
+      - ./.env
+    environment:
+      C_FORCE_ROOT: "yes"
+      CELERY_BROKER_URL: "redis://redis:6379/0"
+...

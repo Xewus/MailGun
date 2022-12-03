@@ -89,8 +89,6 @@ def choose_template_view():
     if request.method == 'POST' and form.validate_on_submit():
         template = templates[int(form.choice.data)][1]
 
-        print template
-
         celery_send_mail.apply_async((
             g.user.email,
             g.user.password,

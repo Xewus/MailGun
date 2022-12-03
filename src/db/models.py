@@ -10,6 +10,7 @@ from src.web.server import db
 
 
 class BaseModel(Model):
+    pass
     class Meta:
         database = db.database
 
