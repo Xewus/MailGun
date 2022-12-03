@@ -1,0 +1,13 @@
+<nav class="navbar navbar-light" style="background-color: #eb9c00">
+    <a class="p-2 text-dark" href="/" title="MailGun"><h5 class="my-0 mr-md-auto font-weight-normal">
+      <span style="color:red">Mail</span>Gun</span></h5>
+    </a>
+    <nav class="my-2 my-md-0 mr-md-9">
+      {% if g.user %}
+        Пользователь: {{ user.username }}
+        <a class="p-2 text-dark" href="{{ url_for('auth.logout') }}">Выйти</a>
+      {% else %}
+        <a class="p-2 text-dark" href="{{ url_for('auth.login') }}">Войти / Зарегистрироваться</a>
+      {% endif %}
+    </nav>
+  </nav> 

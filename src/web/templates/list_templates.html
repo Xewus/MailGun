@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <div class="jumbotron">
+        <h5>На данный момент доступны следующие шаблоны:</h5>
+        <br>
+        <h6>Слова, выделенные двойными кавычками, являются изменяемыми значениями.</h6>
+        <br>
+        <br>
+        {% for template in templates %}
+        <ul>
+
+          <br>
+          <div class="col-md-9" style="display: flex; justify-content: center">
+            <button type="submit" class="btn btn-primary" style="background-color: #eb9c00">
+              <a
+                class="p-2 text-dark"
+                href="{{ url_for('look_template_view', template=template) }}"
+              >
+
+                {{ template }}
+
+              </a>
+            </button>
+          </div>
+          
+        </ul>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

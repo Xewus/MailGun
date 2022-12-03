@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <div class="jumbotron">
+
+    <form action="" method="post" novalidate>
+      {{ form.csrf_token }}
+      {{ form.hidden_tag() }}
+      <p>
+
+        <div class="col-md-9" style="display: flex; justify-content: center">
+          {{ form.contact_email.label }}<br>
+        </div>
+        <div class="col-md-9" style="display: flex; justify-content: center">
+          {{ form.contact_email }}<br>
+        </div>
+
+
+        <div class="col-md-9" style="display: flex; justify-content: center">
+          {% for error in form.contact_email.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+      </p>
+      <p>
+        <div class="col-md-9" style="display: flex; justify-content: center">
+          {{ form.contact_name.label }}<br>
+        </div>
+        <div class="col-md-9" style="display: flex; justify-content: center">
+          {{ form.contact_name }}<br>
+        </div>
+        <div class="col-md-9" style="display: flex; justify-content: center">
+          {% for error in form.contact_name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+        </div>
+
+      </p>
+      <p>
+        <div class="col-md-9" style="display: flex; justify-content: center">
+          {{ form.submit(type="submit", class="btn btn-primary", style="background-color: #eb9c00") }}
+        </div>
+      </p>
+    </form>
+
+    </div>
+</div>
+{% endblock %}

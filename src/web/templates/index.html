@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3" style="display: flex; justify-content: center">
+      <div class="jumbotron">
+        Сервис позволяет рассылать шаблонные электронные письма с Вашего электронного почтового ящика.
+        <br>
+
+        <br>
+        <div class="col-md-9" style="display: flex; justify-content: center">
+          <button type="submit" class="btn btn-primary" style="background-color: #eb9c00">
+            <a
+              class="p-2 text-dark"
+              href="{{ url_for('list_email_templates_view') }}"
+            >
+              Посмотреть шаблоны писем
+            </a>
+          </button>
+        </div>
+
+        <br>
+        <div class="col-md-9" style="display: flex; justify-content: center">
+          <button type="submit" class="btn btn-primary" style="background-color: #eb9c00">
+            <a
+              class="p-2 text-dark"
+              href="{{ url_for('choose_template_view') }}"
+            >
+              Выбрать шаблон для рассылки
+            </a>
+          </button>
+        </div>
+
+        <br>
+        <div class="col-md-9" style="display: flex; justify-content: center">
+          <button type="submit" class="btn btn-primary" style="background-color: #eb9c00">
+            <a
+              class="p-2 text-dark"
+              href="{{ url_for('load_contacts_view') }}"
+            >
+              Загрузить файл.csv с контактами для рассылки
+            </a>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

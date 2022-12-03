@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Mailgun{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <div class="jumbotron">
+        <br>
+        Вы можете отправить не более <span style="color:red">{{ g.user.level}}</span> сообщений.
+        <br>
+        Получатели сообщений будут выбраны случайно из Вашего списка контактов.
+        <br>
+        Для увелечиения доступного количества - окажите мне материальную помощь.
+        <br>
+        <br>
+        <br>
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+
+            {{ form.choice.label }}<br>
+            {{ form.choice(placeholder=form.choice.label.text, rows="3", class="list-unstyled")}}
+            <p class="text-danger">
+              {% if form.choice.errors %}
+                {% for error in form.choice.errors %}
+                  {{ error }}
+                {% endfor %}
+              {% endif %}
+            </p>
+            {{ form.countdown.label }}
+            {{ form.countdown(type="number", min="0", max="999") }}
+
+            <p class="text-danger">
+              {% if form.countdown.errors %}
+                {% for error in form.countdown.errors %}
+                  {{ error }}
+                {% endfor %}
+              {% endif %}
+            </p>
+
+            <div class="col-md-9" style="display: flex; justify-content: center">
+              {{ form.submit(class="button px-3 py-2 btn", style="background-color: #eb9c00") }}
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

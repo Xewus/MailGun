@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <div class="jumbotron">
+        <h5>Если в базе данных уже есть контакты, связанные с Вами, при новой загрузке файла - они будут удалены.</h5>
+        Файл должен быть в формате <span style="color:red">.csv</span>.
+        <br>
+        <br>    
+        Файл может быть не более 1МБ, это примерно 30 000 контактов.
+        <br>
+        <br>    
+        Данные в файле должны быть расположены следующим образом:
+        <br>
+        <br>
+        example@gmail.ru,Иван<br>
+        another@yandex.us,John<br>
+        <br>
+        <form action="" method=post enctype=multipart/form-data>
+          
+          <br>
+          <div class="col-md-9" style="display: flex; justify-content: center">
+            <button type="submit" class="btn btn-primary" style="background-color: #eb9c00">
+              <input type=file name=file><br>
+            </button>
+          </div>    
+          
+          <br>
+          <div class="col-md-9" style="display: flex; justify-content: center">
+            <button type="submit" class="btn btn-primary" style="background-color: #eb9c00">
+              <input type=submit value=Загрузить>
+            </button>
+          </div>
+
+        </form>
+        <br>
+        Также можете добавить контакты поштучно:<br>
+        <a
+            class="p-2 text-dark"
+            href="{{ url_for('add_contact_view') }}"
+          >
+            Перейти в ручной режим >
+          </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
