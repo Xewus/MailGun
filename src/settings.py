@@ -25,7 +25,7 @@ PAGE_TEMPLATES_DIR = os.path.join(root_dir, 'web/templates')
 EMAIL_TEMPLATES_DIR = os.path.join(root_dir, 'email_templates')
 
 UPLOAD_DIR = os.path.join(root_dir, '../upload')
-print UPLOAD_DIR
+
 if not os.path.exists(UPLOAD_DIR):
     os.makedirs(UPLOAD_DIR)
 

@@ -2,23 +2,23 @@
 
 from random import randint
 
-from flask import flash, g, redirect, render_template, request, url_for
+from flask import flash, g, redirect, render_template, request, url_for, Blueprint
 
 from src.celery_tasks.tasks import celery_send_mail
 from src.core.utils import get_list_email_templates, save_uploaded_file
 from src.db.models import Contacts
 from src.web.forms import AddContactForm, ChoiceTemplateForm
-from src.web.server import auth, flask_app
+from src.web.server import auth
+blue = Blueprint(name='spamer', import_name=__name__)
 
-
-@flask_app.route('/')
+@blue.route('/')
 def index_view():
     return render_template(
         'index.html', title=u'Сервис рассылки электронных писем'
     )
 
 
-@flask_app.route('/list_templates')
+@blue.route('/list_templates')
 def list_email_templates_view():
     return render_template(
         'list_templates.html',
@@ -27,7 +27,7 @@ def list_email_templates_view():
     )
 
 
-@flask_app.route('/load_contacts', methods=('GET', 'POST',))
+@blue.route('/load_contacts', methods=('GET', 'POST',))
 @auth.login_required
 def load_contacts_view():
     if request.method == 'POST' and request.files['file']:
@@ -35,14 +35,14 @@ def load_contacts_view():
         if file_name:
             Contacts.insert_from_csv(file_name, g.user.id)
             flash(u'Контакты добавлены')
-            return redirect(url_for('index_view'))
+            return redirect(url_for('spamer.index_view'))
         flash(u'Файл `%s` несохранён' % request.files['file'].filename)
     return render_template(
         'upload_contacts.html', title=u'Загрузить контакты'
     )
 
 
-@flask_app.route('/add_contact', methods={'GET', 'POST'})
+@blue.route('/add_contact', methods={'GET', 'POST'})
 @auth.login_required
 def add_contact_view():
     message = u'Контакт был добавлен'
@@ -61,12 +61,12 @@ def add_contact_view():
     )
 
 
-@flask_app.route('/look_template/<template>')
+@blue.route('/look_template/<template>')
 def look_template_view(template):
     return render_template(template)
 
 
-@flask_app.route('/choose_template', methods=('GET', 'POST'))
+@blue.route('/choose_template', methods=('GET', 'POST'))
 @auth.login_required
 def choose_template_view():
     form = ChoiceTemplateForm()
@@ -74,7 +74,7 @@ def choose_template_view():
 
     if not recepients:
         flash(u'Некому рассылать, добавьте список контактов')
-        return redirect(url_for('load_contacts_view'))
+        return redirect(url_for('spamer.load_contacts_view'))
     
     templates = list(enumerate(get_list_email_templates()))
     form.choice.choices = templates
@@ -99,7 +99,7 @@ def choose_template_view():
 
         flash(u'Рассылка с шаблоном `%s` начата' % template)
 
-        return redirect(url_for('index_view'))
+        return redirect(url_for('spamer.index_view'))
 
     return render_template(
         'choose_template.html',

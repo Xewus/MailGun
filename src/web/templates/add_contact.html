@@ -20,7 +20,7 @@
 
         <div class="col-md-9" style="display: flex; justify-content: center">
           {% for error in form.contact_email.errors %}
-          <span style="color: red;">[{{ error }}]</span>
+          <span style="color: red;">{{ error }}</span>
           {% endfor %}
         </div>
       </p>
@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-9" style="display: flex; justify-content: center">
           {% for error in form.contact_name.errors %}
-            <span style="color: red;">[{{ error }}]</span>
+            <span style="color: red;">{{ error }}</span>
           {% endfor %}
         </div>
 

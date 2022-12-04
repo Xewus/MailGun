@@ -57,7 +57,7 @@ class MyAuth(Auth):
                 flash(
                     u'Рассылка будет с адреса: %s' % form.user_email.data
                  )
-                return redirect(url_for('index_view'))
+                return redirect(url_for('spamer.index_view'))
             flash(error)
 
         return render_template('login.html', 

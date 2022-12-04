@@ -24,13 +24,10 @@
             <button type="submit" class="btn btn-primary" style="background-color: #eb9c00">
               <input type=file name=file><br>
             </button>
-          </div>    
-          
+          </div>
           <br>
           <div class="col-md-9" style="display: flex; justify-content: center">
-            <button type="submit" class="btn btn-primary" style="background-color: #eb9c00">
-              <input type=submit value=Загрузить>
-            </button>
+            <input type=submit value=Загрузить class="btn btn-primary" style="background-color: #eb9c00">
           </div>
 
         </form>
@@ -38,7 +35,7 @@
         Также можете добавить контакты поштучно:<br>
         <a
             class="p-2 text-dark"
-            href="{{ url_for('add_contact_view') }}"
+            href="{{ url_for('spamer.add_contact_view') }}"
           >
             Перейти в ручной режим >
           </a>

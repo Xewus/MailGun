@@ -8,6 +8,7 @@ from src.settings import EMAIL_TEMPLATES_DIR, PAGE_TEMPLATES_DIR, FlaskConfig
 flask_app = Flask(__name__)
 
 flask_app.config.update(**FlaskConfig)
+flask_app.config["APPLICATION_ROOT"] = "/abc/123"
 
 db = Database(app=flask_app)
 
@@ -25,10 +26,16 @@ auth = MyAuth(
     app=flask_app,
     db=db,
     user_model=User,
-    prefix=''
+    prefix='/spam',
+    default_next_url='/spam'
 )
 
 User.create_table(fail_silently=True)
 Contacts.create_table(fail_silently=True)
 
-from . import views
+from .views import blue
+
+flask_app.register_blueprint(
+    blueprint=blue,
+    url_prefix='/spam'
+)
