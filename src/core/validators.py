@@ -1,11 +1,11 @@
 # This Python file uses the following encoding: utf-8
- 
+
 from validate_email import validate_email
 from wtforms.validators import StopValidation
 
 
 class EmailValidator(object):
-    def __init__(self, message = None, verify=False):
+    def __init__(self, message=None, verify=False):
         self.message = message or u'Некорректная почта'
         self.verify = verify
 

@@ -2,14 +2,17 @@
 
 from random import randint
 
-from flask import flash, g, redirect, render_template, request, url_for, Blueprint
+from flask import (Blueprint, flash, g, redirect, render_template, request,
+                   url_for)
 
 from src.celery_tasks.tasks import celery_send_mail
 from src.core.utils import get_list_email_templates, save_uploaded_file
 from src.db.models import Contacts
 from src.web.forms import AddContactForm, ChoiceTemplateForm
 from src.web.server import auth
+
 blue = Blueprint(name='spamer', import_name=__name__)
+
 
 @blue.route('/')
 def index_view():
@@ -75,7 +78,7 @@ def choose_template_view():
     if not recepients:
         flash(u'Некому рассылать, добавьте список контактов')
         return redirect(url_for('spamer.load_contacts_view'))
-    
+
     templates = list(enumerate(get_list_email_templates()))
     form.choice.choices = templates
 

@@ -3,8 +3,7 @@ import os
 
 from validate_email import validate_email
 
-from src.settings import (ALLOWED_EXTENSIONS, EMAIL_TEMPLATES_DIR,
-                               UPLOAD_DIR)
+from src.settings import ALLOWED_EXTENSIONS, EMAIL_TEMPLATES_DIR, UPLOAD_DIR
 
 
 def save_uploaded_file(file, user_id):
@@ -18,12 +17,12 @@ def save_uploaded_file(file, user_id):
     if '.' in file.filename:
         _, ext = file.filename.rsplit('.')
     if ext in ALLOWED_EXTENSIONS:
-        file.filename = '%d.%s' % (user_id , ext)
+        file.filename = '%d.%s' % (user_id, ext)
         file_path = os.path.join(UPLOAD_DIR, file.filename)
         file.save(file_path)
         return file_path
     return
-    
+
 
 def get_contact_from_csv(file_name, user_id):
     """Cet unique emails and bound names from `.csv` file.
@@ -47,7 +46,7 @@ def get_contact_from_csv(file_name, user_id):
                     {
                         'email': row[0],
                         'name': row[-1],
-                        'user_id':user_id
+                        'user_id': user_id
                     }
                 )
         return data

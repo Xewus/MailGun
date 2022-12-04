@@ -3,14 +3,13 @@
 from peewee import (BooleanField, CharField, ForeignKeyField, IntegerField,
                     Model)
 
-from src.settings import (MAX_LENGTH_EMAIL, MAX_LENGTH_PASSWORD,
-                               MAX_LENGTH_USERNAME)
 from src.core.utils import get_contact_from_csv
+from src.settings import (MAX_LENGTH_EMAIL, MAX_LENGTH_PASSWORD,
+                          MAX_LENGTH_USERNAME)
 from src.web.server import db
 
 
 class BaseModel(Model):
-    pass
     class Meta:
         database = db.database
 
@@ -51,12 +50,12 @@ class Contacts(BaseModel):
     )
     name = CharField(
         max_length=MAX_LENGTH_USERNAME,
-        null = False
+        null=False
     )
 
     class Meta:
         table_name = 'contacts'
-    
+
     @staticmethod
     def insert_from_csv(file_name, user_id, delete_old=True):
         """Fill in a table with contacts for the user from `csv` file.
@@ -71,7 +70,7 @@ class Contacts(BaseModel):
         """
         data = get_contact_from_csv(file_name, user_id)
         if delete_old:
-            Contacts.delete().where(Contacts.user_id==user_id).execute()
+            Contacts.delete().where(Contacts.user_id == user_id).execute()
         Contacts.insert_many(
             data,
             fields=[Contacts.email, Contacts.name, Contacts.user_id]
@@ -83,7 +82,7 @@ class Contacts(BaseModel):
 
         #### Args:
         - user_id: The contacts`s owner id.
-        
+
         #### Returns:
         - list[dict['email': str, 'name': str, 'user_id': int]]
         """

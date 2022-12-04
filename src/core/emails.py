@@ -7,7 +7,7 @@ from email.mime.text import MIMEText
 from jinja2 import Environment, FileSystemLoader
 
 from src.settings import (EMAIL_TEMPLATES_DIR, GOOGLE_CODE_CONNECTED,
-                               GOOGLE_CODE_LOGINED, GOOGLE_HOST, GOOGLE_PORT)
+                          GOOGLE_CODE_LOGINED, GOOGLE_HOST, GOOGLE_PORT)
 
 env = Environment(
     loader=FileSystemLoader(EMAIL_TEMPLATES_DIR))
@@ -27,7 +27,7 @@ class SmtpConnection(object):
             self.__init_google_mail(password=password)
         else:
             return
-    
+
     def __init_google_mail(self, password):
         """Connect to Google SMTP and set attr self.set_connection.
         If connection `OK`,
@@ -65,7 +65,7 @@ class SmtpConnection(object):
         except smtplib.SMTPAuthenticationError:
             return 'Incorrect email or application_key.'
         return None
-    
+
     def check_connection(self):
         err = self.set_connection
         if not err:
@@ -87,8 +87,8 @@ class HtmlEmail(object):
         header=None,
         standart=True
     ):
-        self.from_addr=from_addr
-        self.to_addr=recepient['email']
+        self.from_addr = from_addr
+        self.to_addr = recepient['email']
         if standart:
             self.email = self.__make_standart_emal(
                 template, from_addr, recepient, payload, header
@@ -113,7 +113,7 @@ class HtmlEmail(object):
         email_text = template.render(recepient)
         email = MIMEMultipart('alternative')
         email['From'] = from_addr
-        
+
         if recepient:
             email['To'] = recepient['email']
         if header:

@@ -1,13 +1,13 @@
 # This Python file uses the following encoding: utf-8
- 
+
 from flask_wtf import FlaskForm
 from wtforms import (BooleanField, IntegerField, PasswordField, RadioField,
                      StringField, SubmitField)
 from wtforms.validators import DataRequired, Length, NumberRange
 
-from src.settings import (MAX_CELERY_DELAY, MAX_LENGTH_EMAIL,
-                               MAX_LENGTH_PASSWORD, MAX_LENGTH_USERNAME)
 from src.core.validators import EmailValidator
+from src.settings import (MAX_CELERY_DELAY, MAX_LENGTH_EMAIL,
+                          MAX_LENGTH_PASSWORD, MAX_LENGTH_USERNAME)
 
 
 class LoginForm(FlaskForm):
@@ -73,7 +73,7 @@ class ChoiceTemplateForm(FlaskForm):
         validators=[
             NumberRange(min=0, max=MAX_CELERY_DELAY)
         ],
-        default = 0
+        default=0
     )
     submit = SubmitField(
         label=u'Начать рассылку'

@@ -1,5 +1,6 @@
 import os
 import sys
+
 from dotenv import load_dotenv
 
 root_dir = os.path.abspath(os.path.dirname(__file__))
@@ -37,7 +38,9 @@ GOOGLE_CODE_LOGINED = [235]
 GOOGLE_HOST = os.environ.get('HOST', 'smtp.gmail.com')
 GOOGLE_PORT = os.environ.get('PORT', 587)
 
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+CELERY_BROKER_URL = os.environ.get(
+    'CELERY_BROKER_URL', 'redis://localhost:6379/0'
+)
 DOCKER_REDIS_NAME = os.environ.get('DOCKER_REDIS_NAME', 'docker_redis')
 
 MAX_CELERY_DELAY = 24 * 3  # Hours

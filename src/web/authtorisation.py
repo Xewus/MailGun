@@ -60,10 +60,11 @@ class MyAuth(Auth):
                 return redirect(url_for('spamer.index_view'))
             flash(error)
 
-        return render_template('login.html', 
-            title = 'Sign In',
-            form = form,
-            error = error
+        return render_template(
+            template_name_or_list='login.html',
+            title='Sign In',
+            form=form,
+            error=error
         )
 
     def logout_user(self):
@@ -72,4 +73,4 @@ class MyAuth(Auth):
         else:
             session.pop('logged_in', None)
         g.user = None
-        flash(u'Вы вышли из аккаунта', 'success') 
+        flash(u'Вы вышли из аккаунта', 'success')

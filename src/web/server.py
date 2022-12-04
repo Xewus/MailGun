@@ -4,7 +4,6 @@ from flask_peewee.db import Database
 
 from src.settings import EMAIL_TEMPLATES_DIR, PAGE_TEMPLATES_DIR, FlaskConfig
 
-
 flask_app = Flask(__name__)
 
 flask_app.config.update(**FlaskConfig)
